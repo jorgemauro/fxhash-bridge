@@ -11,9 +11,8 @@ export default class Nobody extends Style {
     colorpicker=-1
   beforeDraw () {
     this.mul=this._p5.random(1,5)
-    this.fillcel=this._p5.random(0,100)>50
-    this.numberFunction=parseInt(this._p5.random(0,8))
-    console.log(this.numberFunction)
+    this.numberFunction=1//parseInt(this._p5.random(0,8))
+    this.fillcel=this._p5.random(0,100)>50&&this.numberFunction!=1
     this.end=parseInt(this._p5.random(0,4))
     this.grainNumber=this._p5.random(18,30)
     if (!this.seed) this.seed = this._p5.random(9999999999)
@@ -26,10 +25,10 @@ export default class Nobody extends Style {
   
   drawTile (tilePoints, frontLeftCorner3DCoord, isBorder) {
     if(!isBorder){
-    this.noiselineTile(tilePoints[0].x*this._s, tilePoints[0].y* this._s,tilePoints[1].x * this._s,tilePoints[1].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.3:1)
-    this.noiselineTile(tilePoints[3].x*this._s, tilePoints[3].y* this._s,tilePoints[0].x * this._s,tilePoints[0].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.3:1)
-    this.noiselineTile(tilePoints[1].x*this._s, tilePoints[1].y* this._s,tilePoints[2].x * this._s,tilePoints[2].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.3:1)
-    this.noiselineTile(tilePoints[3].x*this._s, tilePoints[3].y* this._s,tilePoints[2].x * this._s,tilePoints[2].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.3:1)
+    this.noiselineTile(tilePoints[0].x*this._s, tilePoints[0].y* this._s,tilePoints[1].x * this._s,tilePoints[1].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.000495*this._s:1)
+    this.noiselineTile(tilePoints[3].x*this._s, tilePoints[3].y* this._s,tilePoints[0].x * this._s,tilePoints[0].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.000495*this._s:1)
+    this.noiselineTile(tilePoints[1].x*this._s, tilePoints[1].y* this._s,tilePoints[2].x * this._s,tilePoints[2].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.000495*this._s:1)
+    this.noiselineTile(tilePoints[3].x*this._s, tilePoints[3].y* this._s,tilePoints[2].x * this._s,tilePoints[2].y* this._s,this.mul,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this._s,this.numberFunction,this.numberFunction==1?0.000495*this._s:1)
     }else{
         if(this.numberFunction!=0&&this.numberFunction!=1){
             for(let l=0;l<4;l++){
@@ -52,14 +51,14 @@ export default class Nobody extends Style {
        if(chooseEnd!=2&&chooseEnd!=3)
         this.rectNoise(this._p5.random(0,x-raio/3),this._p5.random(0,y),20,20,this.mul,2,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this.numberFunction)
       else
-        this.circleNoise(this._p5.random(0,x-raio/3),this._p5.random(0,y),10,this.numberFunction==1?5:10,5,this._p5.color(this.colorL[this.colorpicker]),false,this.numberFunction,0.3)
+        this.circleNoise(this._p5.random(0,x-raio/3),this._p5.random(0,y),10,this.numberFunction==1?5:10,5,this._p5.color(this.colorL[this.colorpicker]),false,this.numberFunction,0.000495*this._s)
         
     }
     for(let o=0;o<this._s;o++){
     if(chooseEnd!=2&&chooseEnd!=3)
        this.rectNoise(this._p5.random(x+raio/3,x+this._s),this._p5.random(0,y),20,20,this.mul,2,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this.numberFunction)
     else
-       this.circleNoise(this._p5.random(x+raio/3,x+this._s),this._p5.random(0,y),10,this.numberFunction==1?5:10,5,this._p5.color(this.colorL[this.colorpicker]),false,this.numberFunction,0.3)
+       this.circleNoise(this._p5.random(x+raio/3,x+this._s),this._p5.random(0,y),10,this.numberFunction==1?5:10,5,this._p5.color(this.colorL[this.colorpicker]),false,this.numberFunction,0.000495*this._s)
         
     }
     console.log(this.numberFunction)
@@ -68,7 +67,7 @@ export default class Nobody extends Style {
             if(chooseEnd!=2&&chooseEnd!=3)
                 this.rectNoise(this._p5.random(x-raio/2,x+raio/2),this._p5.random(0,y-this._s/4),20,20,this.mul,2,this._p5.color(this.colorL[this.colorpicker]),this.fillcel,this.numberFunction)
             else
-            this._projectionCalculator3d.points2d[5][1]>0.03&&this.circleNoise(this._p5.random(x-raio/2,x+raio/2),this._p5.random(0,y-raio/2),8,this.numberFunction==1?5:10,5,this._p5.color(this.colorL[this.colorpicker]),false,this.numberFunction,0.3)
+            this._projectionCalculator3d.points2d[5][1]>0.03&&this.circleNoise(this._p5.random(x-raio/2,x+raio/2),this._p5.random(0,y-raio/2),8,this.numberFunction==1?5:10,5,this._p5.color(this.colorL[this.colorpicker]),false,this.numberFunction,0.000495*this._s)
         }
     }
     switch(chooseEnd){
@@ -92,7 +91,7 @@ export default class Nobody extends Style {
     let dist = p1.dist(p2)
     this._p5.beginShape()
     this._p5.stroke(color1)
-    strokew?this._p5.strokeWeight(strokew):this._p5.strokeWeight(0.3)
+    strokew?this._p5.strokeWeight(strokew):this._p5.strokeWeight(0.000495*this._s)
     fillv?this._p5.fill(color1):this._p5.noFill()
     let mult=fillv?1.5:1
     for(let i=0;i<dist;i+=sqr/800){
@@ -159,10 +158,10 @@ export default class Nobody extends Style {
   returxy(n,interetion,mod){
     switch(n){
       case 0:
-        return({xadd:Math.tan(-interetion/2)*mod,yadd:Math.cos(interetion)*mod})
+        return({xadd:Math.sin(-interetion/2)*this._p5.random(2,10)*mod,yadd:Math.cos(interetion)*mod})
         break;
       case 1:
-        return({xadd:Math.sin(interetion)*mod,yadd:Math.tan(-interetion)*mod})
+        return({xadd:Math.sin(interetion)*mod,yadd:Math.sin(interetion)*this._p5.random(2,10)*mod})
         break;
       case 2:
         return({xadd:Math.cos(interetion*interetion*interetion)*mod,yadd:Math.sin(interetion*interetion*interetion)*mod})
